@@ -40,7 +40,7 @@
             color: inherit;
         }
 
-        /* --- ВИДЕО-БЛОК В САМОМ НАЧАЛЕ --- */
+        /* --- ВИДЕО-БЛОК --- */
         .video-hero {
             position: relative;
             width: 100%;
@@ -67,7 +67,7 @@
             z-index: 1;
         }
 
-        /* --- ДЕКОРАТИВНЫЕ ГРАФИЧЕСКИЕ ФИГУРЫ НА ФОНЕ ЦИТАТЫ --- */
+        /* --- ДЕКОРАТИВНЫЕ ФИГУРЫ --- */
         .quote-decor {
             position: absolute;
             top: 0;
@@ -79,7 +79,37 @@
             overflow: hidden;
         }
 
-        /* Большой круг с градиентом */
+        .quote-decor>div {
+            opacity: 0;
+            transform: translateY(30px) scale(0.8);
+            transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .quote-decor.visible>div {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .quote-decor.visible .decor-circle {
+            transition-delay: 0s;
+        }
+
+        .quote-decor.visible .decor-ring {
+            transition-delay: 0.3s;
+        }
+
+        .quote-decor.visible .decor-triangle {
+            transition-delay: 0.6s;
+        }
+
+        .quote-decor.visible .decor-dot {
+            transition-delay: 0.9s;
+        }
+
+        .quote-decor.visible .decor-hex {
+            transition-delay: 1.2s;
+        }
+
         .quote-decor .decor-circle {
             position: absolute;
             top: 10%;
@@ -87,12 +117,10 @@
             width: 350px;
             height: 350px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(123, 47, 190, 0.35) 0%, rgba(46, 90, 156, 0.1) 60%, transparent 80%);
+            background: radial-gradient(circle at 30% 30%, rgba(123, 47, 190, 0.45) 0%, rgba(46, 90, 156, 0.15) 60%, transparent 80%);
             filter: blur(2px);
-            animation: floatCircle 12s ease-in-out infinite;
         }
 
-        /* Кольцо с градиентной обводкой */
         .quote-decor .decor-ring {
             position: absolute;
             bottom: 5%;
@@ -101,29 +129,23 @@
             height: 280px;
             border-radius: 50%;
             border: 8px solid transparent;
-            background: linear-gradient(135deg, rgba(123, 47, 190, 0.5), rgba(46, 90, 156, 0.5)) border-box;
-            -webkit-mask:
-                linear-gradient(#fff 0 0) padding-box,
-                linear-gradient(#fff 0 0);
+            background: linear-gradient(135deg, rgba(123, 47, 190, 0.7), rgba(46, 90, 156, 0.7)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
-            animation: floatRing 15s ease-in-out infinite reverse;
         }
 
-        /* Треугольник с градиентом */
         .quote-decor .decor-triangle {
             position: absolute;
             top: 15%;
             left: 5%;
             width: 180px;
             height: 180px;
-            background: linear-gradient(135deg, rgba(123, 47, 190, 0.4) 0%, rgba(46, 90, 156, 0.4) 100%);
+            background: linear-gradient(135deg, rgba(123, 47, 190, 0.55) 0%, rgba(46, 90, 156, 0.55) 100%);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             filter: blur(1px);
-            animation: floatTriangle 10s ease-in-out infinite;
         }
 
-        /* Малый круг с синим градиентом */
         .quote-decor .decor-dot {
             position: absolute;
             bottom: 20%;
@@ -131,25 +153,41 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: radial-gradient(circle at 40% 40%, rgba(155, 77, 202, 0.4), rgba(46, 90, 156, 0.2) 70%, transparent 100%);
+            background: radial-gradient(circle at 40% 40%, rgba(155, 77, 202, 0.6), rgba(46, 90, 156, 0.3) 70%, transparent 100%);
             filter: blur(3px);
-            animation: floatDot 8s ease-in-out infinite;
         }
 
-        /* Шестиугольник */
         .quote-decor .decor-hex {
             position: absolute;
             top: 50%;
             right: 3%;
             width: 150px;
             height: 150px;
-            background: linear-gradient(45deg, rgba(123, 47, 190, 0.3), rgba(46, 90, 156, 0.3));
+            background: linear-gradient(45deg, rgba(123, 47, 190, 0.45), rgba(46, 90, 156, 0.45));
             clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
             filter: blur(1px);
-            animation: floatHex 14s ease-in-out infinite reverse;
         }
 
-        /* Анимации плавания фигур */
+        .quote-decor.visible .decor-circle {
+            animation: floatCircle 12s ease-in-out 1.5s infinite;
+        }
+
+        .quote-decor.visible .decor-ring {
+            animation: floatRing 15s ease-in-out 1.5s infinite reverse;
+        }
+
+        .quote-decor.visible .decor-triangle {
+            animation: floatTriangle 10s ease-in-out 1.5s infinite;
+        }
+
+        .quote-decor.visible .decor-dot {
+            animation: floatDot 8s ease-in-out 1.5s infinite;
+        }
+
+        .quote-decor.visible .decor-hex {
+            animation: floatHex 14s ease-in-out 1.5s infinite reverse;
+        }
+
         @keyframes floatCircle {
 
             0%,
@@ -210,7 +248,7 @@
             }
         }
 
-        /* --- ЦИТАТА ПОВЕРХ ВИДЕО --- */
+        /* --- ЦИТАТА --- */
         .quote-overlay {
             position: absolute;
             top: 50%;
@@ -239,7 +277,6 @@
             text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
         }
 
-        /* Градиентная подпись */
         .quote-overlay .quote-author {
             font-size: 1.1rem;
             font-weight: 700;
@@ -292,7 +329,6 @@
             margin-bottom: 4rem;
         }
 
-        /* Карточка на главной */
         .card {
             background: var(--white);
             border-radius: 12px;
@@ -317,9 +353,7 @@
             border-radius: 12px;
             padding: 2px;
             background: var(--gradient-main);
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
@@ -496,13 +530,136 @@
             opacity: 0.95;
         }
 
-        .hero-image img {
-            width: 100%;
+        /* --- СЛАЙДЕР В КАРТОЧКЕ НАПРАВЛЕНИЯ --- */
+        .hero-slider {
+            position: relative;
             border-radius: 8px;
+            overflow: hidden;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             background-color: rgba(255, 255, 255, 0.1);
-            min-height: 250px;
-            object-fit: cover;
+            aspect-ratio: 4 / 3;
+        }
+
+        .slider-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 2rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Градиентные заглушки для слайдов */
+        .slide-1 {
+            background: linear-gradient(135deg, #7B2FBE 0%, #2E5A9C 100%);
+        }
+
+        .slide-2 {
+            background: linear-gradient(135deg, #9B4DCA 0%, #3D6FB8 100%);
+        }
+
+        .slide-3 {
+            background: linear-gradient(135deg, #2E5A9C 0%, #7B2FBE 100%);
+        }
+
+        .slide-4 {
+            background: linear-gradient(135deg, #6B3FA0 0%, #4A7BC8 100%);
+        }
+
+        .slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+            pointer-events: none;
+        }
+
+        /* Кнопки навигации слайдера */
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.2s;
+            z-index: 4;
+            user-select: none;
+        }
+
+        .slider-btn:hover {
+            background: rgba(255, 255, 255, 0.45);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn.prev {
+            left: 15px;
+        }
+
+        .slider-btn.next {
+            right: 15px;
+        }
+
+        /* Точки-индикаторы */
+        .slider-dots {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 4;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .slider-dot.active {
+            background: var(--white);
+            transform: scale(1.2);
+        }
+
+        /* Счётчик слайдов */
+        .slider-counter {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(8px);
+            color: var(--white);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 4;
         }
 
         .hero-badge {
@@ -606,9 +763,7 @@
             border-radius: 12px;
             padding: 2px;
             background: var(--gradient-main);
-            -webkit-mask:
-                linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
@@ -671,81 +826,147 @@
             }
         }
 
-        /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
         @media (max-width: 600px) {
-            .page-title {
-                font-size: 1.8rem;
-                margin: 2rem 0;
-            }
+    .page-title {
+        font-size: 1.8rem;
+        margin: 2rem 0;
+    }
+    .container {
+        padding: 1rem;
+    }
+    .video-hero {
+        height: 70vh;
+        min-height: 400px;
+    }
+    .quote-overlay {
+        padding: 1.5rem 1rem;
+        max-width: 98%;
+        width: 98%;
+    }
+    .quote-overlay .quote-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin-bottom: 1.2rem;
+        padding: 0 0.5rem;
+    }
+    .quote-overlay .quote-author {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+    .quote-overlay .quote-author span {
+        font-size: 0.78rem;
+    }
+    .quote-decor .decor-circle { width: 200px; height: 200px; top: 5%; right: -15%; }
+    .quote-decor .decor-ring { width: 160px; height: 160px; bottom: 3%; left: -15%; border-width: 6px; }
+    .quote-decor .decor-triangle { width: 100px; height: 100px; top: 10%; left: -5%; }
+    .quote-decor .decor-dot { width: 70px; height: 70px; bottom: 15%; right: 5%; }
+    .quote-decor .decor-hex { width: 90px; height: 90px; top: 45%; right: -5%; }
 
-            .container {
-                padding: 1rem;
-            }
+    /* --- БАННЕР: уменьшаем отступы --- */
+    .hero-banner {
+        padding: 1.5rem 1.25rem;
+        gap: 1.25rem;
+    }
 
-            .video-hero {
-                height: 70vh;
-                min-height: 400px;
-            }
+    /* --- СЛАЙДЕР НА МОБИЛЬНЫХ --- */
+    .hero-slider {
+        aspect-ratio: 4 / 3;
+        min-height: 240px;
+        border-radius: 10px;
+    }
 
-            .quote-overlay {
-                padding: 1.5rem 1rem;
-                max-width: 98%;
-                width: 98%;
-            }
+    .slide {
+        font-size: 1.6rem;
+    }
 
-            .quote-overlay .quote-text {
-                font-size: 0.95rem;
-                line-height: 1.5;
-                margin-bottom: 1.2rem;
-                padding: 0 0.5rem;
-            }
+    /* Крупные и удобные кнопки для тапа */
+    .slider-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1.4rem;
+        border-width: 2px;
+        background: rgba(255, 255, 255, 0.35);
+    }
+    .slider-btn.prev { left: 10px; }
+    .slider-btn.next { right: 10px; }
 
-            .quote-overlay .quote-author {
-                font-size: 0.85rem;
-                line-height: 1.4;
-            }
+    /* Точки крупнее и с большим отступом снизу */
+    .slider-dots {
+        bottom: 12px;
+        gap: 10px;
+    }
+    .slider-dot {
+        width: 12px;
+        height: 12px;
+        border-width: 2px;
+    }
 
-            .quote-overlay .quote-author span {
-                font-size: 0.78rem;
-            }
+    /* Счётчик крупнее */
+    .slider-counter {
+        top: 12px;
+        left: 12px;
+        padding: 6px 14px;
+        font-size: 0.85rem;
+    }
 
-            /* Уменьшаем декоративные фигуры на мобильных */
-            .quote-decor .decor-circle {
-                width: 200px;
-                height: 200px;
-                top: 5%;
-                right: -15%;
-            }
+    /* Заголовок баннера меньше */
+    .hero-text h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    .hero-text p {
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
+    }
+    .info-box {
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+    }
+}
 
-            .quote-decor .decor-ring {
-                width: 160px;
-                height: 160px;
-                bottom: 3%;
-                left: -15%;
-                border-width: 6px;
-            }
+/* --- ОЧЕНЬ УЗКИЕ ЭКРАНЫ (до 400px) --- */
+@media (max-width: 400px) {
+    .quote-overlay .quote-text { font-size: 0.85rem; }
+    .quote-overlay .quote-author { font-size: 0.78rem; }
+    .quote-overlay .quote-author span { font-size: 0.72rem; }
 
-            .quote-decor .decor-triangle {
-                width: 100px;
-                height: 100px;
-                top: 10%;
-                left: -5%;
-            }
+    .hero-banner {
+        padding: 1.25rem 1rem;
+    }
 
-            .quote-decor .decor-dot {
-                width: 70px;
-                height: 70px;
-                bottom: 15%;
-                right: 5%;
-            }
+    .hero-slider {
+        min-height: 200px;
+        aspect-ratio: 1 / 1;
+    }
 
-            .quote-decor .decor-hex {
-                width: 90px;
-                height: 90px;
-                top: 45%;
-                right: -5%;
-            }
-        }
+    .slide {
+        font-size: 1.3rem;
+    }
+
+    .slider-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    .slider-btn.prev { left: 8px; }
+    .slider-btn.next { right: 8px; }
+
+    .slider-dot {
+        width: 10px;
+        height: 10px;
+    }
+    .slider-dots {
+        gap: 8px;
+        bottom: 10px;
+    }
+
+    .hero-text h1 {
+        font-size: 1.3rem;
+    }
+    .hero-text p {
+        font-size: 0.9rem;
+    }
+}
 
         @media (max-width: 400px) {
             .quote-overlay .quote-text {
@@ -765,15 +986,14 @@
 
 <body>
 
-    <!-- ВИДЕО-БЛОК С ЦИТАТОЙ В САМОМ НАЧАЛЕ САЙТА -->
+    <!-- ВИДЕО-БЛОК -->
     <section class="video-hero" id="videoHero">
         <video autoplay muted playsinline preload="auto" poster="img/1.jpeg" id="heroVideo">
             <source src="img/video.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
 
-        <!-- Декоративные графические фигуры с градиентом -->
-        <div class="quote-decor">
+        <div class="quote-decor" id="quoteDecor">
             <div class="decor-circle"></div>
             <div class="decor-ring"></div>
             <div class="decor-triangle"></div>
@@ -781,7 +1001,7 @@
             <div class="decor-hex"></div>
         </div>
 
-        <div class="quote-overlay">
+        <div class="quote-overlay" id="quoteOverlay">
             <p class="quote-text">
                 «Мы гордимся тем, что наши воспитанники становятся лидерами в науке и технологиях, и рады видеть, как их
                 успехи укрепляют статус Нижегородской области как центра инновационного образования».
@@ -795,16 +1015,11 @@
 
     <div class="container" id="mainContainer">
 
-        <!-- ГЛАВНАЯ СТРАНИЦА -->
         <div id="main-page">
             <h1 class="page-title">Мастер-классы</h1>
-
-            <div class="cards-grid" id="cards-grid">
-                <!-- Карточки генерируются автоматически через JS -->
-            </div>
+            <div class="cards-grid" id="cards-grid"></div>
         </div>
 
-        <!-- СТРАНИЦЫ НАПРАВЛЕНИЙ -->
         <div id="direction-pages-container"></div>
 
     </div>
@@ -828,7 +1043,6 @@
             bookmarks: { color: 'blue', badge: 'Творчество', title: 'Научные закладки для книг', short: 'Участники познакомятся с основами композиции и простыми приёмами оформления, а затем создадут собственные книжные закладки.', full: 'На занятии участники познакомятся с основами композиции и простыми приёмами оформления, а затем создадут собственные книжные закладки. Мы будем работать с разными визуальными мотивами: учёные и их цитаты, научные символы и коллажи из фрагментов научных журналов, ботанические мотивы и изображения растений. Результат — уникальная закладка, сделанная своими руками, и базовые навыки композиции.', bullets: ['⚛️ Учёные и их известные цитаты.', '🔬 Научные символы и коллажи из фрагментов научных журналов.', '🌿 Ботанические мотивы и изображения растений.', 'Результат: уникальная закладка своими руками и базовые навыки композиции.'], age: 'XX-XX', price: 'XX руб.', image: 'img/14.jpeg' }
         };
 
-        // --- ПЕРЕМЕННАЯ ДЛЯ СОХРАНЕНИЯ ПОЗИЦИИ СКРОЛЛА ---
         let savedScrollPosition = 0;
 
         // --- ГЕНЕРАЦИЯ КАРТОЧЕК ---
@@ -855,7 +1069,7 @@
             grid.innerHTML = html;
         }
 
-        // --- ГЕНЕРАЦИЯ СТРАНИЦ НАПРАВЛЕНИЙ ---
+        // --- ГЕНЕРАЦИЯ СТРАНИЦ НАПРАВЛЕНИЙ СО СЛАЙДЕРОМ ---
         function generateDirectionPages() {
             const container = document.getElementById('direction-pages-container');
             let html = '';
@@ -874,7 +1088,23 @@
                             <div class="info-box">Стоимость ${data.price} | ${data.age}</div>
                         </div>
                         <div class="hero-image">
-                            <img src="${data.image}" alt="${data.title}">
+                            <div class="hero-slider" data-slider="${key}">
+                                <div class="slider-counter"><span class="current">1</span> / 4</div>
+                                <div class="slider-track">
+                                    <div class="slide slide-1">Слайд 1</div>
+                                    <div class="slide slide-2">Слайд 2</div>
+                                    <div class="slide slide-3">Слайд 3</div>
+                                    <div class="slide slide-4">Слайд 4</div>
+                                </div>
+                                <button class="slider-btn prev" onclick="slidePrev(event, '${key}')" aria-label="Предыдущий слайд">‹</button>
+                                <button class="slider-btn next" onclick="slideNext(event, '${key}')" aria-label="Следующий слайд">›</button>
+                                <div class="slider-dots">
+                                    <span class="slider-dot active" onclick="slideTo(event, '${key}', 0)"></span>
+                                    <span class="slider-dot" onclick="slideTo(event, '${key}', 1)"></span>
+                                    <span class="slider-dot" onclick="slideTo(event, '${key}', 2)"></span>
+                                    <span class="slider-dot" onclick="slideTo(event, '${key}', 3)"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="program-details">
@@ -899,8 +1129,52 @@
             container.innerHTML = html;
         }
 
+        // --- ЛОГИКА СЛАЙДЕРА ---
+        const sliderState = {};
+
+        function slideNext(event, key) {
+            event.stopPropagation();
+            const state = sliderState[key] || { current: 0, total: 4 };
+            state.current = (state.current + 1) % state.total;
+            sliderState[key] = state;
+            updateSlider(key);
+        }
+
+        function slidePrev(event, key) {
+            event.stopPropagation();
+            const state = sliderState[key] || { current: 0, total: 4 };
+            state.current = (state.current - 1 + state.total) % state.total;
+            sliderState[key] = state;
+            updateSlider(key);
+        }
+
+        function slideTo(event, key, index) {
+            event.stopPropagation();
+            const state = sliderState[key] || { current: 0, total: 4 };
+            state.current = index;
+            sliderState[key] = state;
+            updateSlider(key);
+        }
+
+        function updateSlider(key) {
+            const state = sliderState[key] || { current: 0, total: 4 };
+            const slider = document.querySelector(`[data-slider="${key}"]`);
+            if (!slider) return;
+
+            const track = slider.querySelector('.slider-track');
+            const dots = slider.querySelectorAll('.slider-dot');
+            const counter = slider.querySelector('.slider-counter .current');
+
+            track.style.transform = `translateX(-${state.current * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === state.current);
+            });
+            if (counter) {
+                counter.textContent = state.current + 1;
+            }
+        }
+
         // --- НАВИГАЦИЯ ---
-        // showMain: возвращаемся на главную и восстанавливаем позицию скролла.
         function showMain() {
             const videoHero = document.getElementById('videoHero');
             videoHero.classList.remove('hidden');
@@ -909,7 +1183,6 @@
             const pages = document.querySelectorAll('.direction-page');
             pages.forEach(page => page.classList.remove('active'));
 
-            // Ждём, пока DOM обновится, затем восстанавливаем позицию скролла
             requestAnimationFrame(function () {
                 requestAnimationFrame(function () {
                     window.scrollTo(0, savedScrollPosition);
@@ -917,9 +1190,7 @@
             });
         }
 
-        // showDirection: открываем карточку. Запоминаем позицию скролла.
         function showDirection(type) {
-            // Запоминаем текущую позицию скролла
             savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
             const videoHero = document.getElementById('videoHero');
@@ -935,15 +1206,15 @@
             window.scrollTo(0, 0);
         }
 
-        // --- ТАЙМЕР ПОЯВЛЕНИЯ ЦИТАТЫ (запускается один раз при загрузке) ---
+        // --- ТАЙМЕР ПОЯВЛЕНИЯ ЦИТАТЫ И ФИГУР ---
         function startQuoteTimer() {
             const isMobile = window.innerWidth <= 600;
             const delay = isMobile ? 11000 : 9000;
             setTimeout(function () {
-                const quote = document.querySelector('.quote-overlay');
-                if (quote) {
-                    quote.classList.add('visible');
-                }
+                const quote = document.getElementById('quoteOverlay');
+                if (quote) quote.classList.add('visible');
+                const decor = document.getElementById('quoteDecor');
+                if (decor) decor.classList.add('visible');
             }, delay);
         }
 
