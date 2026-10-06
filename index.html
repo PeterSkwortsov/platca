@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Кванториум | Платные программы</title>
+    <title>Кванториум | Мастер-классы</title>
     <style>
         /* --- БАЗОВЫЕ СТИЛИ И ПЕРЕМЕННЫЕ --- */
         :root {
@@ -13,6 +13,12 @@
             --white: #ffffff;
             --dark: #1a1a1a;
             --gray: #f4f4f4;
+            --purple: #7B2FBE;
+            --violet: #9B4DCA;
+            --deep-blue: #2E5A9C;
+            --gradient-main: linear-gradient(135deg, #7B2FBE 0%, #2E5A9C 100%);
+            --gradient-hover: linear-gradient(135deg, #9B4DCA 0%, #3D6FB8 100%);
+            --gradient-text: linear-gradient(135deg, #7B2FBE 0%, #2E5A9C 100%);
             --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
@@ -44,6 +50,10 @@
             background-color: #000;
         }
 
+        .video-hero.hidden {
+            display: none;
+        }
+
         .video-hero video {
             position: absolute;
             top: 50%;
@@ -57,20 +67,167 @@
             z-index: 1;
         }
 
-        /* Цитата поверх видео */
+        /* --- ДЕКОРАТИВНЫЕ ГРАФИЧЕСКИЕ ФИГУРЫ НА ФОНЕ ЦИТАТЫ --- */
+        .quote-decor {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        /* Большой круг с градиентом */
+        .quote-decor .decor-circle {
+            position: absolute;
+            top: 10%;
+            right: -5%;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(123, 47, 190, 0.35) 0%, rgba(46, 90, 156, 0.1) 60%, transparent 80%);
+            filter: blur(2px);
+            animation: floatCircle 12s ease-in-out infinite;
+        }
+
+        /* Кольцо с градиентной обводкой */
+        .quote-decor .decor-ring {
+            position: absolute;
+            bottom: 5%;
+            left: -8%;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 8px solid transparent;
+            background: linear-gradient(135deg, rgba(123, 47, 190, 0.5), rgba(46, 90, 156, 0.5)) border-box;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) padding-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: floatRing 15s ease-in-out infinite reverse;
+        }
+
+        /* Треугольник с градиентом */
+        .quote-decor .decor-triangle {
+            position: absolute;
+            top: 15%;
+            left: 5%;
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, rgba(123, 47, 190, 0.4) 0%, rgba(46, 90, 156, 0.4) 100%);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            filter: blur(1px);
+            animation: floatTriangle 10s ease-in-out infinite;
+        }
+
+        /* Малый круг с синим градиентом */
+        .quote-decor .decor-dot {
+            position: absolute;
+            bottom: 20%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 40%, rgba(155, 77, 202, 0.4), rgba(46, 90, 156, 0.2) 70%, transparent 100%);
+            filter: blur(3px);
+            animation: floatDot 8s ease-in-out infinite;
+        }
+
+        /* Шестиугольник */
+        .quote-decor .decor-hex {
+            position: absolute;
+            top: 50%;
+            right: 3%;
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, rgba(123, 47, 190, 0.3), rgba(46, 90, 156, 0.3));
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            filter: blur(1px);
+            animation: floatHex 14s ease-in-out infinite reverse;
+        }
+
+        /* Анимации плавания фигур */
+        @keyframes floatCircle {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(-20px, 20px) scale(1.05);
+            }
+        }
+
+        @keyframes floatRing {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(20px, -15px) rotate(180deg);
+            }
+        }
+
+        @keyframes floatTriangle {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(15px, 20px) rotate(-20deg);
+            }
+        }
+
+        @keyframes floatDot {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(-15px, -20px) scale(1.15);
+            }
+        }
+
+        @keyframes floatHex {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(-10px, 15px) rotate(30deg);
+            }
+        }
+
+        /* --- ЦИТАТА ПОВЕРХ ВИДЕО --- */
         .quote-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
+            transform: translate(-50%, -50%) scale(0.95);
+            z-index: 3;
             text-align: center;
             max-width: 900px;
             padding: 2rem 3rem;
-            color: var(--dark);
             opacity: 0;
-            animation: quoteAppear 2s ease-in-out 9s forwards;
+            transition: opacity 2s ease-in-out, transform 2s ease-in-out;
             pointer-events: none;
+        }
+
+        .quote-overlay.visible {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
         }
 
         .quote-overlay .quote-text {
@@ -79,32 +236,31 @@
             line-height: 1.5;
             margin-bottom: 2rem;
             color: var(--dark);
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
         }
 
+        /* Градиентная подпись */
         .quote-overlay .quote-author {
             font-size: 1.1rem;
             font-weight: 700;
             line-height: 1.4;
-            color: var(--dark);
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
 
         .quote-overlay .quote-author span {
             display: block;
-            font-weight: 400;
+            font-weight: 500;
             font-size: 1rem;
             margin-top: 0.3rem;
-        }
-
-        @keyframes quoteAppear {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0.95);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
 
         /* --- ГЛАВНАЯ СТРАНИЦА --- */
@@ -120,6 +276,13 @@
             font-size: 2.5rem;
             text-transform: uppercase;
             font-weight: 800;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: inline-block;
+            width: 100%;
         }
 
         .cards-grid {
@@ -134,16 +297,44 @@
             background: var(--white);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(123, 47, 190, 0.15);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            padding: 2px;
+            background: var(--gradient-main);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.6;
+            transition: opacity 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(123, 47, 190, 0.3);
+        }
+
+        .card:hover::before {
+            opacity: 1;
         }
 
         .card-image {
@@ -161,21 +352,22 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.2);
+            background: linear-gradient(180deg, rgba(123, 47, 190, 0.1) 0%, rgba(46, 90, 156, 0.3) 100%);
         }
 
         .card-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: var(--white);
-            color: var(--dark);
+            background: var(--gradient-main);
+            color: var(--white);
             padding: 5px 15px;
             border-radius: 20px;
             font-weight: bold;
             font-size: 0.8rem;
             text-transform: uppercase;
             z-index: 2;
+            box-shadow: 0 4px 10px rgba(123, 47, 190, 0.3);
         }
 
         .card-content {
@@ -191,6 +383,11 @@
             margin-bottom: 0.5rem;
             text-transform: uppercase;
             line-height: 1.3;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
 
         .card-desc {
@@ -210,11 +407,16 @@
         }
 
         .price {
-            color: var(--orange);
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
             font-size: 1.1rem;
+            font-weight: 700;
         }
 
-        /* --- СТРАНИЦА НАПРАВЛЕНИЯ (ДЕТАЛЬНАЯ) --- */
+        /* --- СТРАНИЦА НАПРАВЛЕНИЯ --- */
         .direction-page {
             display: none;
             animation: fadeIn 0.5s ease;
@@ -236,7 +438,6 @@
             }
         }
 
-        /* Баннер в стиле ваших картинок */
         .hero-banner {
             border-radius: 12px;
             padding: 3rem;
@@ -250,7 +451,6 @@
             margin-bottom: 3rem;
         }
 
-        /* Текстура и фоновые элементы */
         .hero-banner::before {
             content: '';
             position: absolute;
@@ -330,17 +530,20 @@
         .back-btn {
             display: inline-block;
             margin-bottom: 2rem;
-            color: #666;
             font-weight: 600;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: opacity 0.3s;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
 
         .back-btn:hover {
-            color: var(--orange);
+            opacity: 0.7;
         }
 
-        /* Детали программы */
         .program-details {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -351,6 +554,12 @@
             font-size: 1.6rem;
             margin-bottom: 1rem;
             text-transform: uppercase;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: inline-block;
         }
 
         .program-details ul {
@@ -368,7 +577,11 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: var(--orange);
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
             font-weight: bold;
         }
 
@@ -376,18 +589,70 @@
             background: var(--white);
             padding: 2rem;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 25px rgba(123, 47, 190, 0.15);
             height: fit-content;
+            position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            padding: 2px;
+            background: var(--gradient-main);
+            -webkit-mask:
+                linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.5;
         }
 
         .sidebar h3 {
             margin-bottom: 1rem;
             font-size: 1.3rem;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: inline-block;
         }
 
         .sidebar p {
             margin-bottom: 1rem;
             color: #555;
+        }
+
+        .btn-gradient {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--gradient-main);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(123, 47, 190, 0.3);
+        }
+
+        .btn-gradient:hover {
+            background: var(--gradient-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(123, 47, 190, 0.5);
         }
 
         /* Адаптивность */
@@ -404,36 +669,95 @@
             .hero-text h1 {
                 font-size: 1.8rem;
             }
-
-            .quote-overlay {
-                padding: 1.5rem;
-                max-width: 95%;
-            }
-
-            .quote-overlay .quote-text {
-                font-size: 1.2rem;
-            }
-
-            .quote-overlay .quote-author {
-                font-size: 0.95rem;
-            }
         }
 
+        /* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
         @media (max-width: 600px) {
             .page-title {
                 font-size: 1.8rem;
+                margin: 2rem 0;
             }
 
             .container {
                 padding: 1rem;
             }
 
+            .video-hero {
+                height: 70vh;
+                min-height: 400px;
+            }
+
+            .quote-overlay {
+                padding: 1.5rem 1rem;
+                max-width: 98%;
+                width: 98%;
+            }
+
             .quote-overlay .quote-text {
-                font-size: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.5;
+                margin-bottom: 1.2rem;
+                padding: 0 0.5rem;
             }
 
             .quote-overlay .quote-author {
                 font-size: 0.85rem;
+                line-height: 1.4;
+            }
+
+            .quote-overlay .quote-author span {
+                font-size: 0.78rem;
+            }
+
+            /* Уменьшаем декоративные фигуры на мобильных */
+            .quote-decor .decor-circle {
+                width: 200px;
+                height: 200px;
+                top: 5%;
+                right: -15%;
+            }
+
+            .quote-decor .decor-ring {
+                width: 160px;
+                height: 160px;
+                bottom: 3%;
+                left: -15%;
+                border-width: 6px;
+            }
+
+            .quote-decor .decor-triangle {
+                width: 100px;
+                height: 100px;
+                top: 10%;
+                left: -5%;
+            }
+
+            .quote-decor .decor-dot {
+                width: 70px;
+                height: 70px;
+                bottom: 15%;
+                right: 5%;
+            }
+
+            .quote-decor .decor-hex {
+                width: 90px;
+                height: 90px;
+                top: 45%;
+                right: -5%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .quote-overlay .quote-text {
+                font-size: 0.85rem;
+            }
+
+            .quote-overlay .quote-author {
+                font-size: 0.78rem;
+            }
+
+            .quote-overlay .quote-author span {
+                font-size: 0.72rem;
             }
         }
     </style>
@@ -442,11 +766,20 @@
 <body>
 
     <!-- ВИДЕО-БЛОК С ЦИТАТОЙ В САМОМ НАЧАЛЕ САЙТА -->
-    <section class="video-hero">
+    <section class="video-hero" id="videoHero">
         <video autoplay muted playsinline preload="auto" poster="img/1.jpeg" id="heroVideo">
             <source src="img/video.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
         </video>
+
+        <!-- Декоративные графические фигуры с градиентом -->
+        <div class="quote-decor">
+            <div class="decor-circle"></div>
+            <div class="decor-ring"></div>
+            <div class="decor-triangle"></div>
+            <div class="decor-dot"></div>
+            <div class="decor-hex"></div>
+        </div>
 
         <div class="quote-overlay">
             <p class="quote-text">
@@ -460,18 +793,18 @@
         </div>
     </section>
 
-    <div class="container">
+    <div class="container" id="mainContainer">
 
-        <!-- ГЛАВНАЯ СТРАНИЦА (СПИСОК ПРОГРАММ) -->
+        <!-- ГЛАВНАЯ СТРАНИЦА -->
         <div id="main-page">
-            <h1 class="page-title">Платные программы</h1>
+            <h1 class="page-title">Мастер-классы</h1>
 
             <div class="cards-grid" id="cards-grid">
                 <!-- Карточки генерируются автоматически через JS -->
             </div>
         </div>
 
-        <!-- СТРАНИЦЫ НАПРАВЛЕНИЙ (генерируются автоматически через JS) -->
+        <!-- СТРАНИЦЫ НАПРАВЛЕНИЙ -->
         <div id="direction-pages-container"></div>
 
     </div>
@@ -479,237 +812,29 @@
     <script>
         // --- ДАННЫЕ О НАПРАВЛЕНИЯХ ---
         const directions = {
-            clay: {
-                color: 'orange',
-                badge: 'Творчество',
-                title: 'Создание изделий из глины',
-                short: 'Лепка из глины: от простых форм до авторских изделий. Развиваем мелкую моторику и чувство материала.',
-                full: 'На занятиях мы знакомимся с глиной как материалом, осваиваем базовые техники лепки, работу с фактурой и декором. Каждый участник создаст своё уникальное изделие, которое можно забрать домой после обжига.',
-                bullets: [
-                    'Знакомство с видами глины и инструментами.',
-                    'Базовые техники: жгут, пласт, формовка.',
-                    'Декорирование и роспись изделий.',
-                    'Создание авторского изделия за курс.'
-                ],
-                age: 'XX-XX',
-                price: '1600 руб.',
-                image: 'img/1.jpeg'
-            },
-            figma: {
-                color: 'blue',
-                badge: 'IT',
-                title: 'Графический дизайн в Figma',
-                short: 'Осваиваем современный инструмент дизайна: интерфейсы, макеты, прототипы и работа с графикой.',
-                full: 'Figma — один из самых популярных инструментов графического дизайна в мире. На занятиях мы научимся создавать макеты сайтов и приложений, работать с типографикой, цветом и сетками, а также делать интерактивные прототипы.',
-                bullets: [
-                    'Интерфейс Figma и базовые инструменты.',
-                    'Работа с фигурами, текстом и изображениями.',
-                    'Создание макета сайта или приложения.',
-                    'Интерактивные прототипы и анимация.'
-                ],
-                age: 'XX-XX',
-                price: '500 руб.',
-                image: 'img/2.jpeg'
-            },
-            flexagon: {
-                color: 'orange',
-                badge: 'Математика',
-                title: 'Необычный флексагон',
-                short: 'Создаём удивительную геометрическую игрушку-трансформер, которая раскрывает секреты математики.',
-                full: 'Флексагон — это бумажный многоугольник, который может менять свою форму и количество сторон при складывании. Это не только увлекательная игрушка, но и наглядный пример математических закономерностей.',
-                bullets: [
-                    'История и виды флексагонов.',
-                    'Математика за флексагоном: симметрия и топология.',
-                    'Пошаговое создание своего флексагона.',
-                    'Игры и головоломки с флексагоном.'
-                ],
-                age: 'XX-XX',
-                price: '500 руб.',
-                image: 'img/3.jpeg'
-            },
-            urban: {
-                color: 'blue',
-                badge: 'Дизайн',
-                title: 'Урбанистический дизайн и дизайн пространства',
-                short: 'Цветоведение, стили, чем граффити отличается от мурала, разбираем что такое МАФ, делаем чертёж и макет городской локации.',
-                full: 'Программа посвящена дизайну городской среды. Мы разберём основы цветоведения и стилей, выясним, чем граффити отличается от мурала, что такое малые архитектурные формы (МАФ). На практике создадим чертёж и макет городской локации.',
-                bullets: [
-                    'Основы цветоведения и стилей в дизайне.',
-                    'Граффити vs мурал: в чём разница.',
-                    'Что такое МАФ и зачем они нужны.',
-                    'Чертёж и макет городской локации.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/4.jpeg'
-            },
-            dreamcity: {
-                color: 'orange',
-                badge: 'Проект',
-                title: 'Создание города мечты',
-                short: 'Придумываем сказочный город с нуля: экономическую структуру, численность населения, законы, карты, мерч и макет места в городе.',
-                full: 'Это проектная программа, где каждый участник или команда придумывает сказочный город с нуля. Мы прорабатываем экономическую структуру, численность населения, законы, рисуем карты, придумываем мерч и делаем макет какого-то места в городе.',
-                bullets: [
-                    'Придумываем концепцию города с нуля.',
-                    'Экономическая структура и население.',
-                    'Законы, карты и символика города.',
-                    'Разработка мерча и макета локации.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/5.jpeg'
-            },
-            boardgames: {
-                color: 'blue',
-                badge: 'Игра',
-                title: 'Настольные игры',
-                short: 'Почти каждое занятие мы создаём игры: от самых простых ходилок и «Крокодила» до большой стратегической игры.',
-                full: 'На занятиях мы изучаем мир настольных игр и создаём свои собственные. Начинаем с простых механик (ходилки, «Крокодил»), постепенно переходя к разработке большой стратегической игры с уникальными правилами.',
-                bullets: [
-                    'Изучаем механики настольных игр.',
-                    'Создаём простые игры: ходилки, «Крокодил».',
-                    'Разрабатываем большую стратегическую игру.',
-                    'Играем в свои игры и тестируем их.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/6.jpeg'
-            },
-            animation: {
-                color: 'orange',
-                badge: 'Краткосрочная',
-                title: 'Краткосрочная программа по мультипликации',
-                short: 'Программа состоит из мастер-классов и упражнений на одно-два занятия. Создаём свои первые анимации.',
-                full: 'Это краткосрочная программа, идеально подходящая для первого знакомства с мультипликацией. Состоит из мастер-классов и упражнений на 1-2 занятия. Участники попробуют себя в роли режиссёра, художника и аниматора.',
-                bullets: [
-                    'Основы анимации: кадры и движение.',
-                    'Создание персонажа и фона.',
-                    'Съёмка простого мультфильма.',
-                    'Мастер-классы на 1-2 занятия.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/7.jpeg'
-            },
-            biology: {
-                color: 'blue',
-                badge: 'Наука',
-                title: 'Биология для маленьких',
-                short: 'Увлекательное знакомство с живой природой для самых юных исследователей.',
-                full: 'Программа создана для самых маленьких исследователей. В игровой форме мы знакомимся с растениями, животными, организмом человека и основами экологии. Много практики и наблюдений.',
-                bullets: [
-                    'Живая природа вокруг нас.',
-                    'Растения и животные: кто где живёт.',
-                    'Как устроен человек.',
-                    'Простые опыты и наблюдения.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/8.jpeg'
-            },
-            personal: {
-                color: 'orange',
-                badge: 'Развитие',
-                title: 'Личностное развитие. Социальное проектирование',
-                short: 'Учимся понимать себя, работать в команде и создавать социально значимые проекты.',
-                full: 'Программа направлена на развитие soft skills: самопознание, коммуникация, работа в команде, лидерство. Вторая часть — социальное проектирование: от идеи до реализации проекта, который меняет мир к лучшему.',
-                bullets: [
-                    'Самопознание и уверенность в себе.',
-                    'Коммуникация и работа в команде.',
-                    'Основы социального проектирования.',
-                    'Разработка и защита своего проекта.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/9.jpeg'
-            },
-            theater: {
-                color: 'blue',
-                badge: 'Творчество',
-                title: 'Театральное мастерство',
-                short: 'Сцена, речь, создание личного образа, этюды. Раскрываем актёрские способности.',
-                full: 'На занятиях мы работаем над сценической речью, пластикой, актёрским мастерством. Учимся создавать личный образ, импровизировать и выступать перед публикой. Много практических упражнений и этюдов.',
-                bullets: [
-                    'Сценическая речь и дикция.',
-                    'Актёрское мастерство и этюды.',
-                    'Создание личного образа.',
-                    'Импровизация и выход на сцену.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/10.jpeg'
-            },
-            blogging: {
-                color: 'orange',
-                badge: 'Медиа',
-                title: 'Основы блогинга',
-                short: 'Как вести свой блог, снимать контент, писать тексты и находить свою аудиторию.',
-                full: 'Программа для тех, кто хочет научиться вести свой блог. Разбираем платформы, форматы контента, основы съёмки и монтажа, написание текстов и продвижение. Каждый участник создаст свой первый контент-план.',
-                bullets: [
-                    'Платформы и форматы блогов.',
-                    'Съёмка и монтаж контента.',
-                    'Тексты и работа с аудиторией.',
-                    'Создание личного контент-плана.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/11.jpeg'
-            },
-            math: {
-                color: 'blue',
-                badge: 'Математика',
-                title: 'Ментальная и олимпиадная математика',
-                short: 'Быстрый счёт в уме, логические задачи и подготовка к олимпиадам.',
-                full: 'Программа сочетает ментальную арифметику (быстрый счёт в уме) и олимпиадную математику. Развиваем логику, нестандартное мышление и готовимся к участию в олимпиадах и конкурсах.',
-                bullets: [
-                    'Ментальный счёт: техники и упражнения.',
-                    'Логические задачи и головоломки.',
-                    'Нестандартные методы решения.',
-                    'Подготовка к олимпиадам.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/12.jpeg'
-            },
-            chemistry: {
-                color: 'orange',
-                badge: 'Химия',
-                title: 'Химия цвета: кислотность и индикаторы',
-                short: 'Разберём основные понятия о кислотности среды и индикаторах. Попробуем получить разные цвета химическим путём — смешивая реактивы.',
-                full: 'На занятии мы разберём основные понятия о кислотности среды и индикаторах. Узнаем, как работают природные и синтетические индикаторы, и попробуем получить разные цвета химическим путём — смешивая реактивы. Безопасно, наглядно и очень красиво!',
-                bullets: [
-                    'Что такое кислотность и pH.',
-                    'Природные и синтетические индикаторы.',
-                    'Химические реакции с изменением цвета.',
-                    'Практика: получаем разные цвета.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/13.jpeg'
-            },
-            bookmarks: {
-                color: 'blue',
-                badge: 'Творчество',
-                title: 'Научные закладки для книг',
-                short: 'Участники познакомятся с основами композиции и простыми приёмами оформления, а затем создадут собственные книжные закладки.',
-                full: 'На занятии участники познакомятся с основами композиции и простыми приёмами оформления, а затем создадут собственные книжные закладки. Мы будем работать с разными визуальными мотивами: учёные и их цитаты, научные символы и коллажи из фрагментов научных журналов, ботанические мотивы и изображения растений. Результат — уникальная закладка, сделанная своими руками, и базовые навыки композиции.',
-                bullets: [
-                    '⚛️ Учёные и их известные цитаты.',
-                    '🔬 Научные символы и коллажи из фрагментов научных журналов.',
-                    '🌿 Ботанические мотивы и изображения растений.',
-                    'Результат: уникальная закладка своими руками и базовые навыки композиции.'
-                ],
-                age: 'XX-XX',
-                price: 'XX руб.',
-                image: 'img/14.jpeg'
-            }
+            clay: { color: 'orange', badge: 'Творчество', title: 'Создание изделий из глины', short: 'Лепка из глины: от простых форм до авторских изделий. Развиваем мелкую моторику и чувство материала.', full: 'На занятиях мы знакомимся с глиной как материалом, осваиваем базовые техники лепки, работу с фактурой и декором. Каждый участник создаст своё уникальное изделие, которое можно забрать домой после обжига.', bullets: ['Знакомство с видами глины и инструментами.', 'Базовые техники: жгут, пласт, формовка.', 'Декорирование и роспись изделий.', 'Создание авторского изделия за курс.'], age: 'XX-XX', price: '1600 руб.', image: 'img/1.jpeg' },
+            figma: { color: 'blue', badge: 'IT', title: 'Графический дизайн в Figma', short: 'Осваиваем современный инструмент дизайна: интерфейсы, макеты, прототипы и работа с графикой.', full: 'Figma — один из самых популярных инструментов графического дизайна в мире. На занятиях мы научимся создавать макеты сайтов и приложений, работать с типографикой, цветом и сетками, а также делать интерактивные прототипы.', bullets: ['Интерфейс Figma и базовые инструменты.', 'Работа с фигурами, текстом и изображениями.', 'Создание макета сайта или приложения.', 'Интерактивные прототипы и анимация.'], age: 'XX-XX', price: '500 руб.', image: 'img/2.jpeg' },
+            flexagon: { color: 'orange', badge: 'Математика', title: 'Необычный флексагон', short: 'Создаём удивительную геометрическую игрушку-трансформер, которая раскрывает секреты математики.', full: 'Флексагон — это бумажный многоугольник, который может менять свою форму и количество сторон при складывании. Это не только увлекательная игрушка, но и наглядный пример математических закономерностей.', bullets: ['История и виды флексагонов.', 'Математика за флексагоном: симметрия и топология.', 'Пошаговое создание своего флексагона.', 'Игры и головоломки с флексагоном.'], age: 'XX-XX', price: '500 руб.', image: 'img/3.jpeg' },
+            urban: { color: 'blue', badge: 'Дизайн', title: 'Урбанистический дизайн и дизайн пространства', short: 'Цветоведение, стили, чем граффити отличается от мурала, разбираем что такое МАФ, делаем чертёж и макет городской локации.', full: 'Программа посвящена дизайну городской среды. Мы разберём основы цветоведения и стилей, выясним, чем граффити отличается от мурала, что такое малые архитектурные формы (МАФ). На практике создадим чертёж и макет городской локации.', bullets: ['Основы цветоведения и стилей в дизайне.', 'Граффити vs мурал: в чём разница.', 'Что такое МАФ и зачем они нужны.', 'Чертёж и макет городской локации.'], age: 'XX-XX', price: 'XX руб.', image: 'img/4.jpeg' },
+            dreamcity: { color: 'orange', badge: 'Проект', title: 'Создание города мечты', short: 'Придумываем сказочный город с нуля: экономическую структуру, численность населения, законы, карты, мерч и макет места в городе.', full: 'Это проектная программа, где каждый участник или команда придумывает сказочный город с нуля. Мы прорабатываем экономическую структуру, численность населения, законы, рисуем карты, придумываем мерч и делаем макет какого-то места в городе.', bullets: ['Придумываем концепцию города с нуля.', 'Экономическая структура и население.', 'Законы, карты и символика города.', 'Разработка мерча и макета локации.'], age: 'XX-XX', price: 'XX руб.', image: 'img/5.jpeg' },
+            boardgames: { color: 'blue', badge: 'Игра', title: 'Настольные игры', short: 'Почти каждое занятие мы создаём игры: от самых простых ходилок и «Крокодила» до большой стратегической игры.', full: 'На занятиях мы изучаем мир настольных игр и создаём свои собственные. Начинаем с простых механик (ходилки, «Крокодил»), постепенно переходя к разработке большой стратегической игры с уникальными правилами.', bullets: ['Изучаем механики настольных игр.', 'Создаём простые игры: ходилки, «Крокодил».', 'Разрабатываем большую стратегическую игру.', 'Играем в свои игры и тестируем их.'], age: 'XX-XX', price: 'XX руб.', image: 'img/6.jpeg' },
+            animation: { color: 'orange', badge: 'Краткосрочная', title: 'Краткосрочная программа по мультипликации', short: 'Программа состоит из мастер-классов и упражнений на одно-два занятия. Создаём свои первые анимации.', full: 'Это краткосрочная программа, идеально подходящая для первого знакомства с мультипликацией. Состоит из мастер-классов и упражнений на 1-2 занятия. Участники попробуют себя в роли режиссёра, художника и аниматора.', bullets: ['Основы анимации: кадры и движение.', 'Создание персонажа и фона.', 'Съёмка простого мультфильма.', 'Мастер-классы на 1-2 занятия.'], age: 'XX-XX', price: 'XX руб.', image: 'img/7.jpeg' },
+            biology: { color: 'blue', badge: 'Наука', title: 'Биология для маленьких', short: 'Увлекательное знакомство с живой природой для самых юных исследователей.', full: 'Программа создана для самых маленьких исследователей. В игровой форме мы знакомимся с растениями, животными, организмом человека и основами экологии. Много практики и наблюдений.', bullets: ['Живая природа вокруг нас.', 'Растения и животные: кто где живёт.', 'Как устроен человек.', 'Простые опыты и наблюдения.'], age: 'XX-XX', price: 'XX руб.', image: 'img/8.jpeg' },
+            personal: { color: 'orange', badge: 'Развитие', title: 'Личностное развитие. Социальное проектирование', short: 'Учимся понимать себя, работать в команде и создавать социально значимые проекты.', full: 'Программа направлена на развитие soft skills: самопознание, коммуникация, работа в команде, лидерство. Вторая часть — социальное проектирование: от идеи до реализации проекта, который меняет мир к лучшему.', bullets: ['Самопознание и уверенность в себе.', 'Коммуникация и работа в команде.', 'Основы социального проектирования.', 'Разработка и защита своего проекта.'], age: 'XX-XX', price: 'XX руб.', image: 'img/9.jpeg' },
+            theater: { color: 'blue', badge: 'Творчество', title: 'Театральное мастерство', short: 'Сцена, речь, создание личного образа, этюды. Раскрываем актёрские способности.', full: 'На занятиях мы работаем над сценической речью, пластикой, актёрским мастерством. Учимся создавать личный образ, импровизировать и выступать перед публикой. Много практических упражнений и этюдов.', bullets: ['Сценическая речь и дикция.', 'Актёрское мастерство и этюды.', 'Создание личного образа.', 'Импровизация и выход на сцену.'], age: 'XX-XX', price: 'XX руб.', image: 'img/10.jpeg' },
+            blogging: { color: 'orange', badge: 'Медиа', title: 'Основы блогинга', short: 'Как вести свой блог, снимать контент, писать тексты и находить свою аудиторию.', full: 'Программа для тех, кто хочет научиться вести свой блог. Разбираем платформы, форматы контента, основы съёмки и монтажа, написание текстов и продвижение. Каждый участник создаст свой первый контент-план.', bullets: ['Платформы и форматы блогов.', 'Съёмка и монтаж контента.', 'Тексты и работа с аудиторией.', 'Создание личного контент-плана.'], age: 'XX-XX', price: 'XX руб.', image: 'img/11.jpeg' },
+            math: { color: 'blue', badge: 'Математика', title: 'Ментальная и олимпиадная математика', short: 'Быстрый счёт в уме, логические задачи и подготовка к олимпиадам.', full: 'Программа сочетает ментальную арифметику (быстрый счёт в уме) и олимпиадную математику. Развиваем логику, нестандартное мышление и готовимся к участию в олимпиадах и конкурсах.', bullets: ['Ментальный счёт: техники и упражнения.', 'Логические задачи и головоломки.', 'Нестандартные методы решения.', 'Подготовка к олимпиадам.'], age: 'XX-XX', price: 'XX руб.', image: 'img/12.jpeg' },
+            chemistry: { color: 'orange', badge: 'Химия', title: 'Химия цвета: кислотность и индикаторы', short: 'Разберём основные понятия о кислотности среды и индикаторах. Попробуем получить разные цвета химическим путём — смешивая реактивы.', full: 'На занятии мы разберём основные понятия о кислотности среды и индикаторах. Узнаем, как работают природные и синтетические индикаторы, и попробуем получить разные цвета химическим путём — смешивая реактивы. Безопасно, наглядно и очень красиво!', bullets: ['Что такое кислотность и pH.', 'Природные и синтетические индикаторы.', 'Химические реакции с изменением цвета.', 'Практика: получаем разные цвета.'], age: 'XX-XX', price: 'XX руб.', image: 'img/13.jpeg' },
+            bookmarks: { color: 'blue', badge: 'Творчество', title: 'Научные закладки для книг', short: 'Участники познакомятся с основами композиции и простыми приёмами оформления, а затем создадут собственные книжные закладки.', full: 'На занятии участники познакомятся с основами композиции и простыми приёмами оформления, а затем создадут собственные книжные закладки. Мы будем работать с разными визуальными мотивами: учёные и их цитаты, научные символы и коллажи из фрагментов научных журналов, ботанические мотивы и изображения растений. Результат — уникальная закладка, сделанная своими руками, и базовые навыки композиции.', bullets: ['⚛️ Учёные и их известные цитаты.', '🔬 Научные символы и коллажи из фрагментов научных журналов.', '🌿 Ботанические мотивы и изображения растений.', 'Результат: уникальная закладка своими руками и базовые навыки композиции.'], age: 'XX-XX', price: 'XX руб.', image: 'img/14.jpeg' }
         };
 
-        // --- ГЕНЕРАЦИЯ КАРТОЧЕК НА ГЛАВНОЙ ---
+        // --- ПЕРЕМЕННАЯ ДЛЯ СОХРАНЕНИЯ ПОЗИЦИИ СКРОЛЛА ---
+        let savedScrollPosition = 0;
+
+        // --- ГЕНЕРАЦИЯ КАРТОЧЕК ---
         function generateCards() {
             const grid = document.getElementById('cards-grid');
             let html = '';
-
             for (const [key, data] of Object.entries(directions)) {
                 html += `
                 <div class="card" onclick="showDirection('${key}')">
@@ -727,7 +852,6 @@
                 </div>
                 `;
             }
-
             grid.innerHTML = html;
         }
 
@@ -735,71 +859,75 @@
         function generateDirectionPages() {
             const container = document.getElementById('direction-pages-container');
             let html = '';
-
             for (const [key, data] of Object.entries(directions)) {
                 const colorClass = data.color === 'orange' ? 'orange' : 'blue';
-                const borderStyle = data.color === 'blue'
-                    ? 'border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;'
-                    : '';
-
+                const borderStyle = data.color === 'blue' ? 'border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;' : '';
                 html += `
                 <div id="direction-${key}" class="direction-page">
-                    <span class="back-btn" onclick="showMain()">← Назад к программам</span>
-                    
+                    <span class="back-btn" onclick="showMain()">← Назад к мастер-классам</span>
                     <div class="hero-banner ${colorClass}">
                         <div class="bg-graphic" style="${borderStyle}"></div>
                         <div class="hero-text">
                             <span class="hero-badge">${data.badge}</span>
                             <h1>${data.title}</h1>
                             <p>${data.short}</p>
-                            <div class="info-box">
-                                Стоимость ${data.price} | ${data.age}
-                            </div>
+                            <div class="info-box">Стоимость ${data.price} | ${data.age}</div>
                         </div>
                         <div class="hero-image">
                             <img src="${data.image}" alt="${data.title}">
                         </div>
                     </div>
-
                     <div class="program-details">
                         <div>
                             <h2>О программе</h2>
                             <p>${data.full}</p>
                             <br>
                             <h2>Что вас ждет?</h2>
-                            <ul>
-                                ${data.bullets.map(b => `<li>${b}</li>`).join('')}
-                            </ul>
+                            <ul>${data.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
                         </div>
                         <div class="sidebar">
                             <h3>Записаться</h3>
-                            <p>Оставить заявку можно по телефону или через Навигатор дополнительного образования.</p>
+                            <p>Оставить заявку можно в нашей группе ВКонтакте.</p>
                             <p><strong>Телефон:</strong><br>+7 (831) 214-03-55</p>
                             <p><strong>Адрес:</strong><br>ул. Ульянова, 10Б</p>
-                            <button style="width:100%; padding:10px; background:var(--${data.color}); color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer; margin-top:10px;">Записаться</button>
+                            <a href="https://vk.ru/kvantorium52" target="_blank" rel="noopener noreferrer" class="btn-gradient">Записаться</a>
                         </div>
                     </div>
                 </div>
                 `;
             }
-
             container.innerHTML = html;
         }
 
         // --- НАВИГАЦИЯ ---
+        // showMain: возвращаемся на главную и восстанавливаем позицию скролла.
         function showMain() {
+            const videoHero = document.getElementById('videoHero');
+            videoHero.classList.remove('hidden');
+
             document.getElementById('main-page').style.display = 'block';
             const pages = document.querySelectorAll('.direction-page');
             pages.forEach(page => page.classList.remove('active'));
-            window.scrollTo(0, 0);
+
+            // Ждём, пока DOM обновится, затем восстанавливаем позицию скролла
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    window.scrollTo(0, savedScrollPosition);
+                });
+            });
         }
 
+        // showDirection: открываем карточку. Запоминаем позицию скролла.
         function showDirection(type) {
-            document.getElementById('main-page').style.display = 'none';
+            // Запоминаем текущую позицию скролла
+            savedScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
+            const videoHero = document.getElementById('videoHero');
+            videoHero.classList.add('hidden');
+
+            document.getElementById('main-page').style.display = 'none';
             const pages = document.querySelectorAll('.direction-page');
             pages.forEach(page => page.classList.remove('active'));
-
             const target = document.getElementById('direction-' + type);
             if (target) {
                 target.classList.add('active');
@@ -807,15 +935,28 @@
             window.scrollTo(0, 0);
         }
 
+        // --- ТАЙМЕР ПОЯВЛЕНИЯ ЦИТАТЫ (запускается один раз при загрузке) ---
+        function startQuoteTimer() {
+            const isMobile = window.innerWidth <= 600;
+            const delay = isMobile ? 11000 : 9000;
+            setTimeout(function () {
+                const quote = document.querySelector('.quote-overlay');
+                if (quote) {
+                    quote.classList.add('visible');
+                }
+            }, delay);
+        }
+
         // --- ИНИЦИАЛИЗАЦИЯ ---
         generateCards();
         generateDirectionPages();
-        showMain();
 
-        // --- ПРИНУДИТЕЛЬНЫЙ ЗАПУСК ВИДЕО (обход блокировки автоплея) ---
+        document.getElementById('main-page').style.display = 'block';
+
         document.addEventListener('DOMContentLoaded', function () {
             const video = document.getElementById('heroVideo');
             if (video) {
+                video.currentTime = 0;
                 video.play().catch(function (error) {
                     console.log('Автоплей заблокирован:', error);
                     document.body.addEventListener('click', function () {
@@ -823,6 +964,7 @@
                     }, { once: true });
                 });
             }
+            startQuoteTimer();
         });
     </script>
 </body>
