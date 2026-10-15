@@ -21,30 +21,30 @@
         </div>
 
         <div class="hero-inner">
-            <div class="hero-badge">Детский технопарк</div>
+            <div class="hero-badge reveal">Детский технопарк</div>
 
-            <h1 class="hero-title">
+            <h1 class="hero-title reveal">
                 <span class="hero-title-dark">КВАНТОРИУМ</span>
                 <span class="hero-title-light">НИЖНИЙ НОВГОРОД</span>
             </h1>
 
-            <p class="hero-subtitle">
-                Бесплатное дополнительное образование в области высоких технологий<br>
-                и инженерного творчества для детей 12–18 лет
+            <p class="hero-subtitle reveal">
+                Групповые и индивидуальные мастер-классы,<br>
+                а также курсы для детей от 7 лет
             </p>
 
-            <p class="hero-note">ИДЁТ НАБОР НА ОСЕННИЕ ИНТЕНСИВЫ</p>
+            <p class="hero-note reveal">ИДЁТ НАБОР НА ОСЕННИЕ ИНТЕНСИВЫ</p>
 
             <a href="https://vk.ru/kvantorium52" target="_blank" rel="noopener noreferrer"
-                class="hero-btn">Записаться</a>
+                class="hero-btn reveal">Записаться</a>
 
-            <p class="hero-footnote">Федеральная сеть насчитывает более 135 технопарков по России</p>
+            <p class="hero-footnote reveal">Федеральная сеть насчитывает более 135 технопарков по России</p>
 
             <!-- Наклонные фото -->
-            <div class="hero-photo hero-photo-left">
+            <div class="hero-photo hero-photo-left reveal-left">
                 <img src="img/15.jpg" alt="Команда Кванториума">
             </div>
-            <div class="hero-photo hero-photo-right">
+            <div class="hero-photo hero-photo-right reveal-right">
                 <img src="img/13.jpg" alt="Занятия в Кванториуме">
             </div>
         </div>
@@ -55,7 +55,7 @@
     <!-- ============================================================ -->
     <div class="container" id="mainContainer">
         <div id="main-page">
-            <h1 class="page-title">Мастер-классы</h1>
+            <h1 class="page-title reveal">Мастер-классы</h1>
             <div class="cards-grid" id="cards-grid"></div>
         </div>
         <div id="direction-pages-container"></div>
@@ -65,12 +65,11 @@
     <!-- БЛОК 3 — «ОФЛАЙН»                                             -->
     <!-- ============================================================ -->
     <section class="offline-section">
-        <div class="offline-badge">ОФЛАЙН</div>
+        <div class="offline-badge reveal">ОФЛАЙН</div>
         <div class="offline-grid">
-            <a href="#" class="offline-card">Обучение в квантумах</a>
-            <a href="#" class="offline-card">Участие в сменах</a>
-            <a href="#" class="offline-card">Дополнительные курсы</a>
-            <a href="#" class="offline-card">Сетевые договоры со школами</a>
+            <div class="offline-card reveal-stagger">Обучение в квантумах на современном оборудовании</div>
+            <div class="offline-card reveal-stagger">Летние каникулы</div>
+            <div class="offline-card reveal-stagger">Дополнительные курсы</div>
         </div>
     </section>
 
@@ -83,31 +82,31 @@
             Ваш браузер не поддерживает видео.
         </video>
 
-    <div class="quote-overlay" id="quoteOverlay">
-        <div class="quote-card">
-            <span class="quote-mark">❝</span>
-    
-            <p class="quote-text">
-                <span class="quote-line">«Мы гордимся тем, что наши</span>
-                <span class="quote-line">воспитанники становятся лидерами</span>
-                <span class="quote-line">в науке и технологиях, и рады видеть,</span>
-                <span class="quote-line">как их успехи укрепляют статус</span>
-                <span class="quote-line">Нижегородской области как центра</span>
-                <span class="quote-line">инновационного образования».</span>
-            </p>
-    
-            <div class="quote-divider"></div>
-    
-            <p class="quote-author">
-                Непокорова Светлана Александровна
-                <span>Директор ГБУДО ЦМИНК «Кванториум» Нижний Новгород</span>
-            </p>
+        <div class="quote-overlay" id="quoteOverlay">
+            <div class="quote-card">
+                <span class="quote-mark">❝</span>
+
+                <p class="quote-text">
+                    <span class="quote-line">«Мы гордимся тем, что наши</span>
+                    <span class="quote-line">воспитанники становятся лидерами</span>
+                    <span class="quote-line">в науке и технологиях, и рады видеть,</span>
+                    <span class="quote-line">как их успехи укрепляют статус</span>
+                    <span class="quote-line">Нижегородской области как центра</span>
+                    <span class="quote-line">инновационного образования».</span>
+                </p>
+
+                <div class="quote-divider"></div>
+
+                <p class="quote-author">
+                    Непокорова Светлана Александровна
+                    <span>Директор ГБУДО ЦМИНК «Кванториум» Нижний Новгород</span>
+                </p>
+            </div>
         </div>
-    </div>
     </section>
 
     <!-- ============================================================ -->
-    <!-- БЛОК 5 — СТАТИСТИКА                                           -->
+    <!-- БЛОК 5 — СТАТИСТИКА (фиолетовые карточки)                     -->
     <!-- ============================================================ -->
     <section class="stats-section">
         <svg class="stats-waves" viewBox="0 0 1400 200" preserveAspectRatio="none">
@@ -116,69 +115,59 @@
             <path d="M0,150 Q175,70 350,150 T700,150 T1050,150 T1400,150" fill="none" stroke="#C9B6F0" stroke-width="3"
                 stroke-dasharray="10,8" />
         </svg>
-    
+
         <div class="stats-grid">
-    
-            <div class="stat-card">
+
+            <div class="stat-card reveal-stagger">
                 <div class="stat-number">300</div>
                 <div class="stat-label">Личных и командных побед</div>
                 <div class="stat-sub">Год рекордов!</div>
             </div>
-    
-            <div class="stat-card">
+
+            <div class="stat-card reveal-stagger">
                 <div class="stat-number">100+</div>
                 <div class="stat-label">Проведённых и организованных<br>мероприятий за учебный год</div>
             </div>
-    
-            <div class="stat-card">
+
+            <div class="stat-card reveal-stagger">
                 <div class="stat-number">19000+</div>
                 <div class="stat-label">Участников со всей страны<br>География талантов</div>
             </div>
-    
-            <div class="stat-card">
+
+            <div class="stat-card reveal-stagger">
                 <div class="stat-number">38</div>
                 <div class="stat-label">Педагогов и методистов освоили<br>современные методики обучения</div>
             </div>
-    
-            <div class="stat-card">
-                <div class="stat-number">40+</div>
-                <div class="stat-label">Педагогов поделились практикой<br>в сетевом сообществе</div>
-            </div>
-    
-            <div class="stat-card">
-                <div class="stat-number">180</div>
-                <div class="stat-label">Выездов мобильного технопарка<br>за учебный год</div>
-            </div>
-    
-            <div class="stat-card">
+
+            <div class="stat-card reveal-stagger">
                 <div class="stat-number">6000+</div>
                 <div class="stat-label">Юных инженеров на занятиях<br>«Кванториума»</div>
             </div>
-    
-            <div class="stat-card">
+
+            <div class="stat-card reveal-stagger">
                 <div class="stat-number">150+</div>
                 <div class="stat-label">Организованных квестов, мастер-классов<br>для обучающихся</div>
             </div>
-    
+
         </div>
     </section>
-    
+
     <!-- ============================================================ -->
     <!-- БЛОК 6 — «КАК К НАМ ПОПАСТЬ» + КАРТА                          -->
     <!-- ============================================================ -->
     <section class="map-section">
-        <h2 class="map-title">
+        <h2 class="map-title reveal">
             КАК К НАМ <span class="map-title-accent">ПОПАСТЬ</span>
         </h2>
-        <div class="map-wrapper">
+        <div class="map-wrapper reveal-scale">
             <iframe src="https://yandex.ru/map-widget/v1/?ll=44.012239%2C56.322100&z=17&pt=44.012239,56.322100,pm2rdm"
                 width="100%" height="450" frameborder="0" allowfullscreen="true" loading="lazy">
             </iframe>
         </div>
     </section>
-    
+
     <!-- JS -->
     <script src="js/script.js"></script>
-    </body>
-    
-    </html>
+</body>
+
+</html>

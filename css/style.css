@@ -10,7 +10,6 @@
     --purple: #7B2FBE;
     --violet: #9B4DCA;
     --deep-blue: #2E5A9C;
-    --green: #4CAF50;
     --gradient-main: linear-gradient(135deg, #7B2FBE 0%, #2E5A9C 100%);
     --gradient-hover: linear-gradient(135deg, #9B4DCA 0%, #3D6FB8 100%);
     --gradient-text: linear-gradient(135deg, #7B2FBE 0%, #2E5A9C 100%);
@@ -50,6 +49,10 @@ a {
     padding: 5rem 2rem 6rem;
     overflow: hidden;
     border-radius: 0 0 30px 30px;
+}
+
+.hero.hidden {
+    display: none;
 }
 
 .hero-decor {
@@ -208,12 +211,8 @@ a {
 
 .hero-photo-right {
     right: 2%;
-    top: 25%;
-    transform: rotate(7deg);
-}
-
-.hero.hidden {
-    display: none;
+    top: 50%;
+    transform: translateY(-50%) rotate(7deg);
 }
 
 /* ============================================================ */
@@ -245,7 +244,7 @@ a {
     z-index: 1;
 }
 
-/* Цитата — фикс шрифта */
+/* ЦИТАТА — стеклянная карточка с построчным появлением */
 .quote-overlay {
     position: absolute;
     top: 50%;
@@ -266,7 +265,6 @@ a {
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* Стеклянная карточка */
 .quote-card {
     position: relative;
     background: rgba(255, 255, 255, 0.85);
@@ -281,7 +279,6 @@ a {
     overflow: hidden;
 }
 
-/* Градиентная рамка */
 .quote-card::before {
     content: '';
     position: absolute;
@@ -296,7 +293,6 @@ a {
     opacity: 0.5;
 }
 
-/* Декоративная кавычка */
 .quote-mark {
     position: absolute;
     top: -0.5rem;
@@ -313,7 +309,6 @@ a {
     user-select: none;
 }
 
-/* Цитата — построчно */
 .quote-text {
     font-family: var(--font-main) !important;
     font-size: 1.35rem !important;
@@ -333,7 +328,6 @@ a {
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-/* Построчное появление с задержкой */
 .quote-overlay.visible .quote-line:nth-child(1) {
     transition-delay: 0.2s;
     opacity: 1;
@@ -370,7 +364,6 @@ a {
     transform: translateY(0);
 }
 
-/* Разделитель */
 .quote-divider {
     width: 80px;
     height: 3px;
@@ -387,7 +380,6 @@ a {
     transform: scaleX(1);
 }
 
-/* Подпись */
 .quote-author {
     font-family: var(--font-main) !important;
     font-size: 1.05rem !important;
@@ -419,6 +411,7 @@ a {
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
 /* ============================================================ */
 /* БЛОК 4 — ГЛАВНАЯ С КАРТОЧКАМИ                                 */
 /* ============================================================ */
@@ -905,7 +898,7 @@ a {
 }
 
 /* ============================================================ */
-/* БЛОК 6 — «ОФЛАЙН»                                             */
+/* БЛОК 6 — «ОФЛАЙН» (3 карточки без ссылок)                     */
 /* ============================================================ */
 .offline-section {
     max-width: 1200px;
@@ -947,8 +940,8 @@ a {
     font-size: 1.15rem;
     font-weight: 600;
     color: #2E5A9C;
-    text-decoration: none;
     transition: background 0.3s, color 0.3s, transform 0.2s;
+    cursor: default;
 }
 
 .offline-card:hover {
@@ -957,12 +950,8 @@ a {
     transform: translateY(-4px);
 }
 
-.offline-grid .offline-card:nth-child(4) {
-    grid-column: 2 / 3;
-}
-
 /* ============================================================ */
-/* БЛОК 7 — СТАТИСТИКА (зелёные плашки)                          */
+/* БЛОК 7 — СТАТИСТИКА (фиолетовые карточки)                     */
 /* ============================================================ */
 .stats-section {
     position: relative;
@@ -988,26 +977,39 @@ a {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
 
 .stat-card {
-    background: #4CAF50;
+    background: var(--gradient-main);
     color: #ffffff;
     border-radius: 16px;
     padding: 1.75rem 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    box-shadow: 0 10px 25px rgba(76, 175, 80, 0.25);
+    box-shadow: 0 10px 25px rgba(123, 47, 190, 0.25);
     transition: transform 0.25s, box-shadow 0.25s;
     min-height: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+    pointer-events: none;
 }
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 15px 35px rgba(123, 47, 190, 0.45);
 }
 
 .stat-number {
@@ -1017,6 +1019,8 @@ a {
     margin-bottom: 0.75rem;
     color: #ffffff;
     letter-spacing: -1px;
+    position: relative;
+    z-index: 1;
 }
 
 .stat-label {
@@ -1025,6 +1029,8 @@ a {
     font-weight: 500;
     color: #ffffff;
     opacity: 0.95;
+    position: relative;
+    z-index: 1;
 }
 
 .stat-sub {
@@ -1033,6 +1039,8 @@ a {
     margin-top: 0.6rem;
     color: #FFF9C4;
     font-style: italic;
+    position: relative;
+    z-index: 1;
 }
 
 /* ============================================================ */
@@ -1169,7 +1177,7 @@ a {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .offline-grid .offline-card:nth-child(4) {
+    .offline-grid .offline-card:nth-child(3) {
         grid-column: 1 / 3;
         max-width: 50%;
         margin: 0 auto;
@@ -1306,31 +1314,46 @@ a {
         height: 50px;
     }
 
-    /* ВИДЕО */
+    /* ВИДЕО + ЦИТАТА */
     .video-hero {
         height: 70vh;
         min-height: 400px;
     }
 
     .quote-overlay {
-        padding: 1.5rem 1rem;
+        padding: 0 1rem;
         max-width: 98%;
-        width: 98%;
     }
 
-    .quote-overlay .quote-text {
-        font-size: 0.95rem !important;
+    .quote-card {
+        padding: 2rem 1.5rem 1.75rem;
+        border-radius: 18px;
+    }
+
+    .quote-mark {
+        font-size: 4rem;
+        top: -0.3rem;
+        left: 1rem;
+    }
+
+    .quote-text {
+        font-size: 0.9rem !important;
         line-height: 1.5 !important;
-        margin-bottom: 1.2rem !important;
-        padding: 0 0.5rem;
+        gap: 0.1rem;
     }
 
-    .quote-overlay .quote-author {
+    .quote-divider {
+        width: 60px;
+        height: 2px;
+        margin-bottom: 1.2rem;
+    }
+
+    .quote-author {
         font-size: 0.85rem !important;
     }
 
-    .quote-overlay .quote-author span {
-        font-size: 0.78rem !important;
+    .quote-author span {
+        font-size: 0.75rem !important;
     }
 
     /* БАННЕР + СЛАЙДЕР */
@@ -1415,7 +1438,7 @@ a {
         gap: 1rem;
     }
 
-    .offline-grid .offline-card:nth-child(4) {
+    .offline-grid .offline-card:nth-child(3) {
         grid-column: auto;
         max-width: none;
     }
@@ -1481,16 +1504,26 @@ a {
 
 /* Очень узкие экраны — до 400px */
 @media (max-width: 400px) {
-    .quote-overlay .quote-text {
-        font-size: 0.85rem !important;
+    .quote-card {
+        padding: 1.5rem 1.1rem 1.4rem;
+        border-radius: 16px;
     }
 
-    .quote-overlay .quote-author {
+    .quote-mark {
+        font-size: 3rem;
+        left: 0.8rem;
+    }
+
+    .quote-text {
+        font-size: 0.82rem !important;
+    }
+
+    .quote-author {
         font-size: 0.78rem !important;
     }
 
-    .quote-overlay .quote-author span {
-        font-size: 0.72rem !important;
+    .quote-author span {
+        font-size: 0.7rem !important;
     }
 
     .hero-banner {
@@ -1557,5 +1590,113 @@ a {
 
     .stat-number {
         font-size: 2rem;
+    }
+}
+
+/* ============================================================ */
+/* БЛОК 10 — ПЛАВНЫЕ АНИМАЦИИ ПРИ СКРОЛЛЕ                        */
+/* ============================================================ */
+
+/* Базовое состояние — скрыто и сдвинуто */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition:
+        opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+/* Показанное состояние */
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Каскадное появление карточек --- */
+.reveal-stagger {
+    opacity: 0;
+    transform: translateY(50px);
+    transition:
+        opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+}
+
+.reveal-stagger.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Появление слева --- */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.reveal-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- Появление справа --- */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.reveal-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* --- Масштабирование (для карты, плашек) --- */
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.94);
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.reveal-scale.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Отключаем анимации у пользователей с настройкой "уменьшить движение" */
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal,
+    .reveal-stagger,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+/* Мобильные — уменьшаем сдвиг, чтобы не было дёрганий */
+@media (max-width: 600px) {
+    .reveal {
+        transform: translateY(25px);
+    }
+
+    .reveal-stagger {
+        transform: translateY(30px);
+    }
+
+    .reveal-left {
+        transform: translateX(-30px);
+    }
+
+    .reveal-right {
+        transform: translateX(30px);
+    }
+
+    .reveal-scale {
+        transform: scale(0.97);
     }
 }
